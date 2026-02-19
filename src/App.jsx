@@ -4,11 +4,11 @@ import "./App.css";
 /* ─── Constants ──────────────────────────────────────────────── */
 const SCREENS = { HOME:"home", CHAT:"chat", CAMERA:"camera", VITALS:"vitals", REPORT:"report", REMINDERS:"reminders", RESULT:"result" };
 const RED_FLAGS = [
-  { keywords:["chest pain","chest tightness","chest pressure"], action:"CALL 911 IMMEDIATELY — Chest pain may indicate a heart attack. Do not wait." },
-  { keywords:["can't breathe","cannot breathe","shortness of breath","difficulty breathing"], action:"CALL 911 IMMEDIATELY — Breathing difficulty requires emergency care." },
-  { keywords:["stroke","face drooping","arm weakness","speech difficulty","sudden numbness"], action:"CALL 911 IMMEDIATELY — These are stroke symptoms. Every second counts." },
-  { keywords:["unconscious","not breathing","unresponsive","seizure"], action:"CALL 911 IMMEDIATELY — This is a life-threatening emergency." },
-  { keywords:["severe bleeding","bleeding won't stop"], action:"CALL 911 IMMEDIATELY — Severe bleeding requires emergency care." },
+  { keywords:["chest pain","chest tightness","chest pressure"], action:"CALL 108 IMMEDIATELY — Chest pain may indicate a heart attack. Do not wait." },
+  { keywords:["can't breathe","cannot breathe","shortness of breath","difficulty breathing"], action:"CALL 108 IMMEDIATELY — Breathing difficulty requires emergency care." },
+  { keywords:["stroke","face drooping","arm weakness","speech difficulty","sudden numbness"], action:"CALL 108 IMMEDIATELY — These are stroke symptoms. Every second counts." },
+  { keywords:["unconscious","not breathing","unresponsive","seizure"], action:"CALL 108 IMMEDIATELY — This is a life-threatening emergency." },
+  { keywords:["severe bleeding","bleeding won't stop"], action:"CALL 108 IMMEDIATELY — Severe bleeding requires emergency care." },
 ];
 function checkRedFlags(t){ const l=t.toLowerCase(); for(const f of RED_FLAGS){ if(f.keywords.some(k=>l.includes(k))) return f.action; } return null; }
 const REMINDER_MESSAGES = [
@@ -93,8 +93,8 @@ function EmergencyModal({ redFlag, onDismiss }) {
         <div style={{width:52,height:52,borderRadius:"50%",background:"#fef2f2",border:"1.5px solid #fecaca",margin:"0 auto 14px",display:"flex",alignItems:"center",justifyContent:"center",color:"#dc2626"}}>{Ico.alert}</div>
         <div style={{fontFamily:"Playfair Display",fontSize:20,fontWeight:900,color:"#dc2626",marginBottom:10}}>Emergency Alert</div>
         <div style={{fontSize:13,lineHeight:1.7,color:T.textMd,marginBottom:22}}>{redFlag}</div>
-        <a href="tel:911" style={{display:"block",background:`linear-gradient(135deg,${T.red},${T.redDk})`,color:"#fff",fontWeight:800,fontSize:17,padding:"13px 0",borderRadius:12,textDecoration:"none",marginBottom:10,boxShadow:`0 6px 18px ${T.red}40`}}>
-          Call 911 Now
+        <a href="tel:108" style={{display:"block",background:`linear-gradient(135deg,${T.red},${T.redDk})`,color:"#fff",fontWeight:800,fontSize:17,padding:"13px 0",borderRadius:12,textDecoration:"none",marginBottom:10,boxShadow:`0 6px 18px ${T.red}40`}}>
+          Call 108 Now
         </a>
         <button onClick={onDismiss} style={{color:T.textXs,fontSize:12,background:"none",border:"none",cursor:"pointer"}}>Dismiss</button>
       </div>
@@ -141,13 +141,13 @@ function DesktopSidebar({ screen, setScreen, navItems }) {
 
       {/* Emergency */}
       <div style={{padding:"16px 12px",borderTop:`1px solid ${T.border}`}}>
-        <a href="tel:911" style={{display:"flex",alignItems:"center",gap:10,background:"#fff1f2",border:"1px solid #fecdd3",borderRadius:12,padding:"12px 14px",textDecoration:"none",transition:"all .15s"}}
+        <a href="tel:108" style={{display:"flex",alignItems:"center",gap:10,background:"#fff1f2",border:"1px solid #fecdd3",borderRadius:12,padding:"12px 14px",textDecoration:"none",transition:"all .15s"}}
           onMouseOver={e=>{ e.currentTarget.style.background="#fee2e2"; }}
           onMouseOut={e=>{ e.currentTarget.style.background="#fff1f2"; }}>
           <div style={{width:32,height:32,borderRadius:9,background:"#fee2e2",display:"flex",alignItems:"center",justifyContent:"center",color:"#dc2626",flexShrink:0}}>{Ico.alert}</div>
           <div>
             <div style={{fontSize:12,fontWeight:700,color:"#dc2626"}}>Emergency</div>
-            <div style={{fontSize:11,color:"#f87171"}}>Call 911</div>
+            <div style={{fontSize:11,color:"#f87171"}}>Call 108</div>
           </div>
         </a>
       </div>
@@ -454,8 +454,8 @@ function HomeScreen({ setScreen, patient, setPatient, profileDone, setProfileDon
           <div style={{fontSize:13,fontWeight:700,color:"#dc2626"}}>Life-Threatening Emergency?</div>
           <div style={{fontSize:11,color:"#f87171"}}>Do not wait — call emergency services immediately</div>
         </div>
-        <a href="tel:911" style={{background:`linear-gradient(135deg,${T.red},${T.redDk})`,color:"#fff",fontWeight:700,fontSize:13,padding:"10px 18px",borderRadius:10,textDecoration:"none",flexShrink:0,boxShadow:`0 3px 10px ${T.red}40`}}>
-          Call 911
+        <a href="tel:108" style={{background:`linear-gradient(135deg,${T.red},${T.redDk})`,color:"#fff",fontWeight:700,fontSize:13,padding:"10px 18px",borderRadius:10,textDecoration:"none",flexShrink:0,boxShadow:`0 3px 10px ${T.red}40`}}>
+          Call 108
         </a>
       </div>
     </div>
