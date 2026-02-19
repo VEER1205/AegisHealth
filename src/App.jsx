@@ -4,11 +4,11 @@ import "./App.css";
 /* ─── Constants ──────────────────────────────────────────────── */
 const SCREENS = { HOME:"home", CHAT:"chat", CAMERA:"camera", VITALS:"vitals", REPORT:"report", REMINDERS:"reminders", RESULT:"result" };
 const RED_FLAGS = [
-  { keywords:["chest pain","chest tightness","chest pressure"], action:"CALL 108 IMMEDIATELY — Chest pain may indicate a heart attack. Do not wait." },
-  { keywords:["can't breathe","cannot breathe","shortness of breath","difficulty breathing"], action:"CALL 108 IMMEDIATELY — Breathing difficulty requires emergency care." },
-  { keywords:["stroke","face drooping","arm weakness","speech difficulty","sudden numbness"], action:"CALL 108 IMMEDIATELY — These are stroke symptoms. Every second counts." },
-  { keywords:["unconscious","not breathing","unresponsive","seizure"], action:"CALL 108 IMMEDIATELY — This is a life-threatening emergency." },
-  { keywords:["severe bleeding","bleeding won't stop"], action:"CALL 108 IMMEDIATELY — Severe bleeding requires emergency care." },
+  { keywords:["chest pain","chest tightness","chest pressure"], action:"CALL 911 IMMEDIATELY — Chest pain may indicate a heart attack. Do not wait." },
+  { keywords:["can't breathe","cannot breathe","shortness of breath","difficulty breathing"], action:"CALL 911 IMMEDIATELY — Breathing difficulty requires emergency care." },
+  { keywords:["stroke","face drooping","arm weakness","speech difficulty","sudden numbness"], action:"CALL 911 IMMEDIATELY — These are stroke symptoms. Every second counts." },
+  { keywords:["unconscious","not breathing","unresponsive","seizure"], action:"CALL 911 IMMEDIATELY — This is a life-threatening emergency." },
+  { keywords:["severe bleeding","bleeding won't stop"], action:"CALL 911 IMMEDIATELY — Severe bleeding requires emergency care." },
 ];
 function checkRedFlags(t){ const l=t.toLowerCase(); for(const f of RED_FLAGS){ if(f.keywords.some(k=>l.includes(k))) return f.action; } return null; }
 const REMINDER_MESSAGES = [
@@ -93,8 +93,8 @@ function EmergencyModal({ redFlag, onDismiss }) {
         <div style={{width:52,height:52,borderRadius:"50%",background:"#fef2f2",border:"1.5px solid #fecaca",margin:"0 auto 14px",display:"flex",alignItems:"center",justifyContent:"center",color:"#dc2626"}}>{Ico.alert}</div>
         <div style={{fontFamily:"Playfair Display",fontSize:20,fontWeight:900,color:"#dc2626",marginBottom:10}}>Emergency Alert</div>
         <div style={{fontSize:13,lineHeight:1.7,color:T.textMd,marginBottom:22}}>{redFlag}</div>
-        <a href="tel:108" style={{display:"block",background:`linear-gradient(135deg,${T.red},${T.redDk})`,color:"#fff",fontWeight:800,fontSize:17,padding:"13px 0",borderRadius:12,textDecoration:"none",marginBottom:10,boxShadow:`0 6px 18px ${T.red}40`}}>
-          Call 108 Now
+        <a href="tel:911" style={{display:"block",background:`linear-gradient(135deg,${T.red},${T.redDk})`,color:"#fff",fontWeight:800,fontSize:17,padding:"13px 0",borderRadius:12,textDecoration:"none",marginBottom:10,boxShadow:`0 6px 18px ${T.red}40`}}>
+          Call 911 Now
         </a>
         <button onClick={onDismiss} style={{color:T.textXs,fontSize:12,background:"none",border:"none",cursor:"pointer"}}>Dismiss</button>
       </div>
@@ -113,7 +113,7 @@ function DesktopSidebar({ screen, setScreen, navItems }) {
             {Ico.heart}
           </div>
           <div>
-            <div style={{fontFamily:"Playfair Display",fontSize:18,fontWeight:900,background:`linear-gradient(135deg,${T.red},${T.pink})`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",lineHeight:1.1}}>MedAssist</div>
+            <div style={{fontFamily:"Playfair Display",fontSize:18,fontWeight:900,background:`linear-gradient(135deg,${T.red},${T.pink})`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",lineHeight:1.1}}>MediGuard</div>
             <div style={{fontSize:9,color:T.textXs,letterSpacing:1.4,textTransform:"uppercase",fontWeight:600,marginTop:1}}>AI Triage Companion</div>
           </div>
         </div>
@@ -141,7 +141,7 @@ function DesktopSidebar({ screen, setScreen, navItems }) {
 
       {/* Emergency */}
       <div style={{padding:"16px 12px",borderTop:`1px solid ${T.border}`}}>
-        <a href="tel:108" style={{display:"flex",alignItems:"center",gap:10,background:"#fff1f2",border:"1px solid #fecdd3",borderRadius:12,padding:"12px 14px",textDecoration:"none",transition:"all .15s"}}
+        <a href="tel:911" style={{display:"flex",alignItems:"center",gap:10,background:"#fff1f2",border:"1px solid #fecdd3",borderRadius:12,padding:"12px 14px",textDecoration:"none",transition:"all .15s"}}
           onMouseOver={e=>{ e.currentTarget.style.background="#fee2e2"; }}
           onMouseOut={e=>{ e.currentTarget.style.background="#fff1f2"; }}>
           <div style={{width:32,height:32,borderRadius:9,background:"#fee2e2",display:"flex",alignItems:"center",justifyContent:"center",color:"#dc2626",flexShrink:0}}>{Ico.alert}</div>
@@ -162,7 +162,7 @@ export default function MedicalTriageApp() {
 
   const [screen, setScreen] = useState(SCREENS.HOME);
   const [messages, setMessages] = useState([
-    { role:"assistant", content:"Hello! I'm MedAssist. Tell me what's bothering you today, and I'll help you determine the right level of care. Describe your symptoms in your own words." }
+    { role:"assistant", content:"Hello! I'm MediGuard. Tell me what's bothering you today, and I'll help you determine the right level of care. Describe your symptoms in your own words." }
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -193,7 +193,7 @@ export default function MedicalTriageApp() {
     const msgs = [...messages, {role:"user",content:text}];
     setMessages(msgs);
     setLoading(true);
-    const sys = `You are MedAssist, a compassionate AI triage assistant.
+    const sys = `You are MediGuard, a compassionate AI triage assistant.
 Patient: Age ${patient.age||"unknown"}, Sex ${patient.sex||"unknown"}, Conditions: ${patient.conditions||"none"}, Medications: ${patient.medications||"none"}.
 Ask about onset, severity 1-10, duration, associated factors. After 3-4 exchanges output triage JSON wrapped in <TRIAGE>:
 <TRIAGE>{"tier":1|2|3,"label":"GO TO ER NOW"|"SEE DOCTOR (24-48 hrs)"|"MANAGE AT HOME","confidence":"high"|"moderate"|"low","topSymptoms":["s1","s2","s3"],"explanation":"plain language reason","caveats":"what system cannot assess"}</TRIAGE>
@@ -299,7 +299,7 @@ Until ready, ask one focused follow-up question. Be warm, concise, never diagnos
         <div style={{padding:"16px 20px 13px",background:T.white,borderBottom:`1px solid ${T.border}`,flexShrink:0}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
             <div>
-              <div style={{fontFamily:"Playfair Display",fontSize:20,fontWeight:900,background:`linear-gradient(135deg,${T.red},${T.pink})`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",lineHeight:1.1}}>MedAssist</div>
+              <div style={{fontFamily:"Playfair Display",fontSize:20,fontWeight:900,background:`linear-gradient(135deg,${T.red},${T.pink})`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",lineHeight:1.1}}>MediGuard</div>
               <div style={{fontSize:10,color:T.textXs,letterSpacing:1.6,textTransform:"uppercase",marginTop:2,fontWeight:600}}>AI Triage Companion</div>
             </div>
             <div className="hpulse" style={{width:38,height:38,borderRadius:"50%",background:`linear-gradient(135deg,${T.red},${T.redDk})`,display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",flexShrink:0,boxShadow:`0 4px 12px ${T.red}40`}}>
@@ -358,7 +358,7 @@ function HomeScreen({ setScreen, patient, setPatient, profileDone, setProfileDon
           <div style={{position:"absolute",bottom:-30,right:30,width:90,height:90,borderRadius:"50%",background:"rgba(255,255,255,.05)",pointerEvents:"none"}}></div>
           <Pill color="#fff" style={{background:"rgba(255,255,255,.22)",color:"#fff",marginBottom:14}}>Smart Medical Triage</Pill>
           <div style={{fontFamily:"Playfair Display",fontSize:28,fontWeight:900,color:"#fff",lineHeight:1.2,marginBottom:12}}>
-            How are you feeling <em>today?</em>
+            How are you feeling today?
           </div>
           <div style={{fontSize:14,color:"rgba(255,255,255,.82)",lineHeight:1.7,marginBottom:24}}>
             Describe your symptoms and receive instant AI-powered triage guidance — from home care to emergency alerts.
@@ -454,7 +454,7 @@ function HomeScreen({ setScreen, patient, setPatient, profileDone, setProfileDon
           <div style={{fontSize:13,fontWeight:700,color:"#dc2626"}}>Life-Threatening Emergency?</div>
           <div style={{fontSize:11,color:"#f87171"}}>Do not wait — call emergency services immediately</div>
         </div>
-        <a href="tel:108" style={{background:`linear-gradient(135deg,${T.red},${T.redDk})`,color:"#fff",fontWeight:700,fontSize:13,padding:"10px 18px",borderRadius:10,textDecoration:"none",flexShrink:0,boxShadow:`0 3px 10px ${T.red}40`}}>
+        <a href="tel:911" style={{background:`linear-gradient(135deg,${T.red},${T.redDk})`,color:"#fff",fontWeight:700,fontSize:13,padding:"10px 18px",borderRadius:10,textDecoration:"none",flexShrink:0,boxShadow:`0 3px 10px ${T.red}40`}}>
           Call 108
         </a>
       </div>
@@ -815,7 +815,7 @@ function ReportScreen({ patient, triageResult, vitals, camera, sound, tierMeta, 
             <div style={{background:`linear-gradient(135deg,${T.red},${T.rose})`,padding:"18px 20px"}}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
                 <div>
-                  <div style={{fontFamily:"Playfair Display",fontSize:17,fontWeight:700,color:"#fff"}}>MedAssist Report</div>
+                  <div style={{fontFamily:"Playfair Display",fontSize:17,fontWeight:700,color:"#fff"}}>MediGuard Report</div>
                   <div style={{fontSize:11,color:"rgba(255,255,255,.72)",marginTop:3}}>{dateStr}</div>
                   <div style={{fontSize:11,color:"rgba(255,255,255,.55)"}}>{timeStr}</div>
                 </div>
@@ -898,7 +898,7 @@ function ReportScreen({ patient, triageResult, vitals, camera, sound, tierMeta, 
 
       <div style={{background:T.bg,border:`1px solid ${T.border}`,borderRadius:10,padding:"11px 16px",marginBottom:16}}>
         <div style={{fontSize:10,color:T.textXs,lineHeight:1.55}}>
-          Generated by MedAssist AI as a decision-support tool only. Does not constitute a medical diagnosis or replace professional medical advice.
+          Generated by MediGuard AI as a decision-support tool only. Does not constitute a medical diagnosis or replace professional medical advice.
         </div>
       </div>
 
