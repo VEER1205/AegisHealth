@@ -32,19 +32,19 @@ function useWindowSize() {
 /* ─── Design Tokens ──────────────────────────────────────────── */
 const T = {
   red: "#38bdf8", redDk: "#0ea5e9", pink: "#67e8f9", rose: "#22d3ee",
-  white: "rgba(255,255,255,0.08)", bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.12)", borderDk: "rgba(255,255,255,0.2)",
-  text: "#f1f5f9", textMd: "#cbd5e1", textXs: "rgba(148,163,184,0.8)", pinkLt: "rgba(56,189,248,0.08)",
-  sidebar: "rgba(15,23,42,0.4)",
-  glass: "rgba(255,255,255,0.07)",
-  glassBorder: "rgba(255,255,255,0.15)",
-  glassHover: "rgba(255,255,255,0.12)",
+  white: "rgba(10,15,30,0.5)", bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.15)", borderDk: "rgba(255,255,255,0.25)",
+  text: "#ffffff", textMd: "#e2e8f0", textXs: "#94a3b8", pinkLt: "rgba(56,189,248,0.1)",
+  sidebar: "rgba(10,15,30,0.7)",
+  glass: "rgba(10,15,30,0.1)",
+  glassBorder: "rgba(255,255,255,0.18)",
+  glassHover: "rgba(255,255,255,0.15)",
 };
 
 /* ─── Global CSS lives in App.css ──────────────────────── */
 
 /* ─── Reusable Components ────────────────────────────────────── */
 const Card = ({ children, style = {}, className = "", ...p }) => (
-  <div className={`glass-card ${className}`} style={{ background: T.glass, border: `1px solid ${T.glassBorder}`, borderRadius: 18, padding: 20, backdropFilter: "blur(16px) saturate(1.2)", WebkitBackdropFilter: "blur(16px) saturate(1.2)", ...style }} {...p}>
+  <div className={`glass-card ${className}`} style={{ background: T.glass, border: `1px solid ${T.glassBorder}`, borderRadius: 18, padding: 20, backdropFilter: "blur(20px) saturate(1.4)", WebkitBackdropFilter: "blur(20px) saturate(1.4)", ...style }} {...p}>
     {children}
   </div>
 );
@@ -109,7 +109,7 @@ function EmergencyModal({ redFlag, onDismiss }) {
 /* ─── Desktop Sidebar ────────────────────────────────────────── */
 function DesktopSidebar({ screen, setScreen, navItems }) {
   return (
-    <div style={{ width: 240, flexShrink: 0, display: "flex", flexDirection: "column", background: "rgba(15,23,42,0.45)", backdropFilter: "blur(24px) saturate(1.3)", WebkitBackdropFilter: "blur(24px) saturate(1.3)", borderRight: `1px solid ${T.glassBorder}`, height: "100vh", position: "sticky", top: 0, overflow: "hidden" }}>
+    <div style={{ width: 240, flexShrink: 0, display: "flex", flexDirection: "column", background: "rgba(10,15,30,0.75)", backdropFilter: "blur(30px) saturate(1.4)", WebkitBackdropFilter: "blur(30px) saturate(1.4)", borderRight: `1px solid ${T.glassBorder}`, height: "100vh", position: "sticky", top: 0, overflow: "hidden" }}>
       {/* Logo */}
       <div style={{ padding: "28px 24px 24px", borderBottom: `1px solid ${T.border}` }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -292,7 +292,7 @@ Until ready, ask one focused follow-up question. Be warm, concise, never diagnos
         <div style={{ zIndex: 1, position: "relative" }}>
           <DesktopSidebar screen={screen} setScreen={setScreen} navItems={navItems} />
         </div>
-        <div style={{ flex: 1, overflowY: "auto", height: "100vh", background: "rgba(15,23,42,0.3)", backdropFilter: "blur(2px)", paddingBottom: 40, zIndex: 1, position: "relative" }}>
+        <div style={{ flex: 1, overflowY: "auto", height: "100vh", background: "rgba(10,15,30,0.55)", backdropFilter: "blur(6px)", paddingBottom: 40, zIndex: 1, position: "relative" }}>
           {renderScreen()}
         </div>
       </div>
@@ -306,7 +306,7 @@ Until ready, ask one focused follow-up question. Be warm, concise, never diagnos
         <FloatingLines linesGradient={["#67e8f9", "#22d3ee", "#0ea5e9", "#0284c7", "#38bdf8"]} />
       </div>
       <EmergencyModal redFlag={redFlag} onDismiss={() => setRedFlag(null)} />
-      <div style={{ width: "100%", maxWidth: 480, minHeight: "100svh", background: "rgba(15,23,42,0.3)", backdropFilter: "blur(2px)", display: "flex", flexDirection: "column", position: "relative", overflow: "hidden", zIndex: 1 }}>
+      <div style={{ width: "100%", maxWidth: 480, minHeight: "100svh", background: "rgba(10,15,30,0.55)", backdropFilter: "blur(6px)", display: "flex", flexDirection: "column", position: "relative", overflow: "hidden", zIndex: 1 }}>
         {/* Mobile Header */}
         <div style={{ padding: "16px 20px 13px", background: T.white, borderBottom: `1px solid ${T.border}`, flexShrink: 0 }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -447,14 +447,14 @@ function HomeScreen({ setScreen, patient, setPatient, profileDone, setProfileDon
       <div className="fadeUp" style={{ display: "grid", gridTemplateColumns: isDesktop ? "repeat(4,1fr)" : "repeat(2,1fr)", gap: 12, marginBottom: 20, animationDelay: ".1s" }}>
         {features.map((f, i) => (
           <button key={i} onClick={() => setScreen(f.screen)}
-            style={{ background: "rgba(255,255,255,0.05)", border: `1px solid rgba(255,255,255,0.1)`, borderRadius: 16, padding: "18px 15px", textAlign: "left", cursor: "pointer", transition: "all .2s", backdropFilter: "blur(12px)", boxShadow: "0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06)" }}
-            onMouseOver={e => { e.currentTarget.style.borderColor = "rgba(56,189,248,0.4)"; e.currentTarget.style.background = "rgba(255,255,255,0.1)"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)" }}
-            onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06)" }}>
+            style={{ background: "rgba(10,15,30,0.5)", border: `1px solid rgba(255,255,255,0.15)`, borderRadius: 16, padding: "18px 15px", textAlign: "left", cursor: "pointer", transition: "all .2s", backdropFilter: "blur(16px)", boxShadow: "0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)" }}
+            onMouseOver={e => { e.currentTarget.style.borderColor = "rgba(56,189,248,0.5)"; e.currentTarget.style.background = "rgba(10,15,30,0.6)"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12)" }}
+            onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.background = "rgba(10,15,30,0.5)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)" }}>
             <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, rgba(56,189,248,0.5), rgba(34,211,238,0.4))`, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", marginBottom: 12, border: "1px solid rgba(255,255,255,0.15)" }}>
               {f.icon}
             </div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#f1f5f9", marginBottom: 3 }}>{f.title}</div>
-            <div style={{ fontSize: 11, color: "rgba(148,163,184,0.8)", lineHeight: 1.4 }}>{f.desc}</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: "#ffffff", marginBottom: 3 }}>{f.title}</div>
+            <div style={{ fontSize: 11, color: "#94a3b8", lineHeight: 1.4 }}>{f.desc}</div>
           </button>
         ))}
       </div>
