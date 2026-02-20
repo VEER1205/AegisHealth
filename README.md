@@ -66,7 +66,7 @@ A premium health triage web app featuring a **liquid glass UI** with an animated
 
 ```bash
 # Clone the repository
-git clone https://github.com/VEER1205/AegisHealth.git
+git clone https://github.com/VEER1205/MediGuard.git
 cd Health-cheker
 
 # Install dependencies
