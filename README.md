@@ -1,4 +1,4 @@
-# 🏥 MediGuard — AI Triage Companion
+# MediGuard — AI Triage Companion
 
 A premium health triage web app featuring a **liquid glass UI** with an animated WebGL background. MediGuard helps users assess symptoms, measure vitals, scan skin conditions, and generate doctor-ready reports — all powered by AI.
 
@@ -9,21 +9,21 @@ A premium health triage web app featuring a **liquid glass UI** with an animated
 
 ---
 
-## ✨ Features
+## Features
 
 | Feature | Description |
 |---|---|
-| **💬 AI Symptom Chat** | Conversational triage with follow-up questions; outputs a tier-based recommendation (ER / Doctor / Home Care) |
-| **📷 Skin & Wound Scanner** | Guided camera UI with real-time tips for capturing affected areas |
-| **❤️ Vital Signs Monitor** | Camera-based heart rate and respiratory rate measurement (PPG simulation) |
-| **🎤 Cough & Breath Analysis** | 10-second sound recording with pattern classification |
-| **📄 Doctor Report** | One-tap shareable summary with patient profile, triage result, and vitals |
-| **🔔 Follow-Up Reminders** | Scheduled 6h / 24h / 48h check-ins to track symptom progression |
-| **🚨 Emergency Detection** | Red-flag keyword detection triggers an immediate 911/108 call prompt |
+| **AI Symptom Chat** | Conversational triage with follow-up questions; outputs a tier-based recommendation (ER / Doctor / Home Care) |
+| **Skin & Wound Scanner** | Guided camera UI with real-time tips for capturing affected areas |
+| **Vital Signs Monitor** | Camera-based heart rate and respiratory rate measurement (PPG simulation) |
+| **Cough & Breath Analysis** | 10-second sound recording with pattern classification |
+| **Doctor Report** | One-tap shareable summary with patient profile, triage result, and vitals |
+| **Follow-Up Reminders** | Scheduled 6h / 24h / 48h check-ins to track symptom progression |
+| **Emergency Detection** | Red-flag keyword detection triggers an immediate 911/108 call prompt |
 
 ---
 
-## 🎨 Design
+## Design
 
 - **Liquid Glass Theme** — Dark glassmorphism with frosted panels, translucent cards, and subtle backdrop blur
 - **Animated WebGL Background** — Floating cyan wave lines rendered via Three.js fragment shaders with mouse interactivity and parallax
@@ -32,7 +32,7 @@ A premium health triage web app featuring a **liquid glass UI** with an animated
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **React 19** — Component-based UI
 - **Vite** — Lightning-fast dev server and bundler
@@ -42,12 +42,25 @@ A premium health triage web app featuring a **liquid glass UI** with an animated
 
 ---
 
-## 🚀 Getting Started
+## Team
+
+| Name | Role |
+|---|---|
+| **Veer Dodiya** | Full Stack Developer |
+| **Nirjal Jagtap** | Frontend Developer |
+| **Hrishikesh Ganji** | Team Lead / ML Engineer |
+| **Chinmay Chopade** | PPT / Docs / Presentation / UI-UX |
+| **Keval Shah** | Frontend Developer |
+| **Dev Shah** | ML Engineer |
+
+---
+
+## Getting Started
 
 ### Prerequisites
 
-- **Node.js** ≥ 18
-- **npm** ≥ 9
+- **Node.js** >= 18
+- **npm** >= 9
 
 ### Installation
 
@@ -74,7 +87,7 @@ npm run preview
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Health-cheker/
@@ -93,7 +106,7 @@ Health-cheker/
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### Floating Lines Background
 
@@ -111,12 +124,12 @@ The `FloatingLines` component accepts these props:
 
 ---
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 MediGuard is a **prototype** and does **not** provide real medical diagnoses. It is intended for educational and demonstration purposes only. Always consult a qualified healthcare professional for medical advice.
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
