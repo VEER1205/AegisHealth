@@ -54,7 +54,7 @@ const Pill = ({ children, color = T.red, style = {} }) => (
   </span>
 );
 const PrimaryBtn = ({ children, style = {}, ...p }) => (
-  <button style={{ background: `linear-gradient(135deg, rgba(56,189,248,0.6), rgba(14,165,233,0.7))`, color: "#fff", fontWeight: 700, fontSize: 14, padding: "13px 22px", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, border: `1px solid rgba(255,255,255,0.2)`, cursor: "pointer", transition: "all .2s", boxShadow: "0 4px 20px rgba(56,189,248,0.25), inset 0 1px 0 rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", ...style }}
+  <button style={{ background: `linear-gradient(135deg, rgba(56,189,248,0.3), rgba(14,165,233,0.3))`, color: "#fff", fontWeight: 700, fontSize: 14, padding: "13px 22px", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, border: `1px solid rgba(255,255,255,0.2)`, cursor: "pointer", transition: "all .2s", boxShadow: "0 4px 20px rgba(56,189,248,0.25), inset 0 1px 0 rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", ...style }}
     onMouseOver={e => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(56,189,248,0.4), inset 0 1px 0 rgba(255,255,255,0.2)" }}
     onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(56,189,248,0.25), inset 0 1px 0 rgba(255,255,255,0.15)" }}
     {...p}>{children}</button>
