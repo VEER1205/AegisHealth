@@ -10,12 +10,15 @@
 
 html,
 body {
-  background: #0f172a;
-  /* Fallback dark blue background */
+  background: #0a0f1e;
   font-family: 'DM Sans', sans-serif;
-  color: #1a0a0e;
+  color: #f1f5f9;
   -webkit-font-smoothing: antialiased;
   height: 100%;
+}
+
+#root {
+  min-height: 100%;
 }
 
 input,
@@ -29,8 +32,17 @@ textarea {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #fbcfe8;
+  background: rgba(56, 189, 248, 0.3);
   border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ── Glass Card Utility ── */
+.glass-card {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 /* ── Keyframe Animations ── */
@@ -138,6 +150,16 @@ textarea {
   }
 }
 
+@keyframes glassShine {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 /* ── Utility Classes ── */
 .fadeUp {
   animation: fadeUp 0.38s ease both;
@@ -159,6 +181,18 @@ textarea {
   display: inline-block;
   width: 3px;
   border-radius: 2px;
-  background: #e11d48;
+  background: #38bdf8;
   margin: 0 1.5px;
+}
+
+/* ── Glass Input Styles ── */
+input:focus {
+  border-color: rgba(56, 189, 248, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(56, 189, 248, 0.3);
+  color: #fff;
 }

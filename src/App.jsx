@@ -31,39 +31,42 @@ function useWindowSize() {
 
 /* ─── Design Tokens ──────────────────────────────────────────── */
 const T = {
-  red: "#0ea5e9", redDk: "#0284c7", pink: "#38bdf8", rose: "#06b6d4",
-  white: "#ffffff", bg: "#f0f9ff", border: "#e0f2fe", borderDk: "#bae6fd",
-  text: "#0f172a", textMd: "#334155", textXs: "#64748b", pinkLt: "#f0f9ff",
-  sidebar: "#f8fafc",
+  red: "#38bdf8", redDk: "#0ea5e9", pink: "#67e8f9", rose: "#22d3ee",
+  white: "rgba(255,255,255,0.08)", bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.12)", borderDk: "rgba(255,255,255,0.2)",
+  text: "#f1f5f9", textMd: "#cbd5e1", textXs: "rgba(148,163,184,0.8)", pinkLt: "rgba(56,189,248,0.08)",
+  sidebar: "rgba(15,23,42,0.4)",
+  glass: "rgba(255,255,255,0.07)",
+  glassBorder: "rgba(255,255,255,0.15)",
+  glassHover: "rgba(255,255,255,0.12)",
 };
 
 /* ─── Global CSS lives in App.css ──────────────────────── */
 
 /* ─── Reusable Components ────────────────────────────────────── */
 const Card = ({ children, style = {}, className = "", ...p }) => (
-  <div className={className} style={{ background: T.white, border: `1px solid ${T.border}`, borderRadius: 16, padding: 20, ...style }} {...p}>
+  <div className={`glass-card ${className}`} style={{ background: T.glass, border: `1px solid ${T.glassBorder}`, borderRadius: 18, padding: 20, backdropFilter: "blur(16px) saturate(1.2)", WebkitBackdropFilter: "blur(16px) saturate(1.2)", ...style }} {...p}>
     {children}
   </div>
 );
 const Pill = ({ children, color = T.red, style = {} }) => (
-  <span style={{ display: "inline-flex", alignItems: "center", gap: 4, background: `${color}14`, color, fontSize: 10, fontWeight: 700, letterSpacing: .9, textTransform: "uppercase", padding: "3px 9px", borderRadius: 999, ...style }}>
+  <span style={{ display: "inline-flex", alignItems: "center", gap: 4, background: `${color}22`, color, fontSize: 10, fontWeight: 700, letterSpacing: .9, textTransform: "uppercase", padding: "3px 9px", borderRadius: 999, border: `1px solid ${color}33`, ...style }}>
     {children}
   </span>
 );
 const PrimaryBtn = ({ children, style = {}, ...p }) => (
-  <button style={{ background: `linear-gradient(135deg,${T.red},${T.redDk})`, color: "#fff", fontWeight: 700, fontSize: 14, padding: "13px 22px", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, border: "none", cursor: "pointer", transition: "transform .15s,box-shadow .15s", boxShadow: `0 4px 14px ${T.red}2e`, ...style }}
-    onMouseOver={e => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = `0 8px 22px ${T.red}44` }}
-    onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 4px 14px ${T.red}2e` }}
+  <button style={{ background: `linear-gradient(135deg, rgba(56,189,248,0.6), rgba(14,165,233,0.7))`, color: "#fff", fontWeight: 700, fontSize: 14, padding: "13px 22px", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, border: `1px solid rgba(255,255,255,0.2)`, cursor: "pointer", transition: "all .2s", boxShadow: "0 4px 20px rgba(56,189,248,0.25), inset 0 1px 0 rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", ...style }}
+    onMouseOver={e => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(56,189,248,0.4), inset 0 1px 0 rgba(255,255,255,0.2)" }}
+    onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(56,189,248,0.25), inset 0 1px 0 rgba(255,255,255,0.15)" }}
     {...p}>{children}</button>
 );
 const GhostBtn = ({ children, style = {}, ...p }) => (
-  <button style={{ background: "transparent", color: T.red, fontWeight: 600, fontSize: 13, padding: "10px 16px", borderRadius: 10, border: `1.5px solid ${T.borderDk}`, cursor: "pointer", transition: "all .15s", ...style }}
-    onMouseOver={e => { e.currentTarget.style.background = T.pinkLt; e.currentTarget.style.borderColor = T.red }}
-    onMouseOut={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = T.borderDk }}
+  <button style={{ background: "rgba(255,255,255,0.05)", color: T.red, fontWeight: 600, fontSize: 13, padding: "10px 16px", borderRadius: 12, border: `1px solid ${T.glassBorder}`, cursor: "pointer", transition: "all .15s", backdropFilter: "blur(8px)", ...style }}
+    onMouseOver={e => { e.currentTarget.style.background = "rgba(255,255,255,0.12)"; e.currentTarget.style.borderColor = T.red }}
+    onMouseOut={e => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.borderColor = T.glassBorder }}
     {...p}>{children}</button>
 );
 const SectionLabel = ({ children, style = {} }) => (
-  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.6, textTransform: "uppercase", color: T.textXs, marginBottom: 10, ...style }}>{children}</div>
+  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.6, textTransform: "uppercase", color: "rgba(148,163,184,0.7)", marginBottom: 10, ...style }}>{children}</div>
 );
 
 /* ─── SVG Icons ──────────────────────────────────────────────── */
@@ -106,7 +109,7 @@ function EmergencyModal({ redFlag, onDismiss }) {
 /* ─── Desktop Sidebar ────────────────────────────────────────── */
 function DesktopSidebar({ screen, setScreen, navItems }) {
   return (
-    <div style={{ width: 240, flexShrink: 0, display: "flex", flexDirection: "column", background: "rgba(248, 250, 252, 0.7)", backdropFilter: "blur(12px)", borderRight: `1px solid ${T.border}`, height: "100vh", position: "sticky", top: 0, overflow: "hidden" }}>
+    <div style={{ width: 240, flexShrink: 0, display: "flex", flexDirection: "column", background: "rgba(15,23,42,0.45)", backdropFilter: "blur(24px) saturate(1.3)", WebkitBackdropFilter: "blur(24px) saturate(1.3)", borderRight: `1px solid ${T.glassBorder}`, height: "100vh", position: "sticky", top: 0, overflow: "hidden" }}>
       {/* Logo */}
       <div style={{ padding: "28px 24px 24px", borderBottom: `1px solid ${T.border}` }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -142,13 +145,13 @@ function DesktopSidebar({ screen, setScreen, navItems }) {
 
       {/* Emergency */}
       <div style={{ padding: "16px 12px", borderTop: `1px solid ${T.border}` }}>
-        <a href="tel:911" style={{ display: "flex", alignItems: "center", gap: 10, background: "#fff1f2", border: "1px solid #fecdd3", borderRadius: 12, padding: "12px 14px", textDecoration: "none", transition: "all .15s" }}
-          onMouseOver={e => { e.currentTarget.style.background = "#fee2e2"; }}
-          onMouseOut={e => { e.currentTarget.style.background = "#fff1f2"; }}>
-          <div style={{ width: 32, height: 32, borderRadius: 9, background: "#fee2e2", display: "flex", alignItems: "center", justifyContent: "center", color: "#dc2626", flexShrink: 0 }}>{Ico.alert}</div>
+        <a href="tel:911" style={{ display: "flex", alignItems: "center", gap: 10, background: "rgba(220,38,38,0.1)", border: "1px solid rgba(220,38,38,0.2)", borderRadius: 12, padding: "12px 14px", textDecoration: "none", transition: "all .15s" }}
+          onMouseOver={e => { e.currentTarget.style.background = "rgba(220,38,38,0.15)"; }}
+          onMouseOut={e => { e.currentTarget.style.background = "rgba(220,38,38,0.1)"; }}>
+          <div style={{ width: 32, height: 32, borderRadius: 9, background: "rgba(220,38,38,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#f87171", flexShrink: 0 }}>{Ico.alert}</div>
           <div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: "#dc2626" }}>Emergency</div>
-            <div style={{ fontSize: 11, color: "#f87171" }}>Call 108</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: "#f87171" }}>Emergency</div>
+            <div style={{ fontSize: 11, color: "rgba(248,113,113,0.6)" }}>Call 108</div>
           </div>
         </a>
       </div>
@@ -283,13 +286,13 @@ Until ready, ask one focused follow-up question. Be warm, concise, never diagnos
     return (
       <div style={{ display: "flex", width: "100%", height: "100vh", background: "transparent", overflow: "hidden", fontFamily: "'DM Sans', sans-serif" }}>
         <div style={{ position: "fixed", inset: 0, zIndex: 0 }}>
-          <FloatingLines linesGradient={["#e0f7fa", "#00bcd4", "#0288d1", "#01579b"]} />
+          <FloatingLines linesGradient={["#67e8f9", "#22d3ee", "#0ea5e9", "#0284c7", "#38bdf8"]} />
         </div>
         <EmergencyModal redFlag={redFlag} onDismiss={() => setRedFlag(null)} />
         <div style={{ zIndex: 1, position: "relative" }}>
           <DesktopSidebar screen={screen} setScreen={setScreen} navItems={navItems} />
         </div>
-        <div style={{ flex: 1, overflowY: "auto", height: "100vh", background: "rgba(240, 249, 255, 0.6)", backdropFilter: "blur(12px)", paddingBottom: 40, zIndex: 1, position: "relative" }}>
+        <div style={{ flex: 1, overflowY: "auto", height: "100vh", background: "rgba(15,23,42,0.3)", backdropFilter: "blur(2px)", paddingBottom: 40, zIndex: 1, position: "relative" }}>
           {renderScreen()}
         </div>
       </div>
@@ -300,10 +303,10 @@ Until ready, ask one focused follow-up question. Be warm, concise, never diagnos
   return (
     <div style={{ width: "100%", minHeight: "100svh", display: "flex", justifyContent: "center", alignItems: "flex-start", background: "transparent", fontFamily: "'DM Sans', sans-serif" }}>
       <div style={{ position: "fixed", inset: 0, zIndex: 0 }}>
-        <FloatingLines linesGradient={["#e0f7fa", "#00bcd4", "#0288d1", "#01579b"]} />
+        <FloatingLines linesGradient={["#67e8f9", "#22d3ee", "#0ea5e9", "#0284c7", "#38bdf8"]} />
       </div>
       <EmergencyModal redFlag={redFlag} onDismiss={() => setRedFlag(null)} />
-      <div style={{ width: "100%", maxWidth: 480, minHeight: "100svh", background: "rgba(240, 249, 255, 0.6)", backdropFilter: "blur(12px)", display: "flex", flexDirection: "column", position: "relative", overflow: "hidden", zIndex: 1 }}>
+      <div style={{ width: "100%", maxWidth: 480, minHeight: "100svh", background: "rgba(15,23,42,0.3)", backdropFilter: "blur(2px)", display: "flex", flexDirection: "column", position: "relative", overflow: "hidden", zIndex: 1 }}>
         {/* Mobile Header */}
         <div style={{ padding: "16px 20px 13px", background: T.white, borderBottom: `1px solid ${T.border}`, flexShrink: 0 }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -362,17 +365,17 @@ function HomeScreen({ setScreen, patient, setPatient, profileDone, setProfileDon
       {/* Hero + Profile row */}
       <div style={{ display: "grid", gridTemplateColumns: isDesktop ? "1fr 1fr" : "1fr", gap: 20, marginBottom: 24, alignItems: "start" }}>
         {/* Hero Banner */}
-        <div className="fadeUp" style={{ background: `linear-gradient(135deg,${T.red},#f43f5e)`, borderRadius: 20, padding: "28px 28px 32px", position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", top: -50, right: -50, width: 160, height: 160, borderRadius: "50%", background: "rgba(255,255,255,.08)", pointerEvents: "none" }}></div>
-          <div style={{ position: "absolute", bottom: -30, right: 30, width: 90, height: 90, borderRadius: "50%", background: "rgba(255,255,255,.05)", pointerEvents: "none" }}></div>
-          <Pill color="#fff" style={{ background: "rgba(255,255,255,.22)", color: "#fff", marginBottom: 14 }}>Smart Medical Triage</Pill>
+        <div className="fadeUp" style={{ background: "linear-gradient(135deg, rgba(56,189,248,0.3), rgba(14,165,233,0.4), rgba(34,211,238,0.2))", borderRadius: 20, padding: "28px 28px 32px", position: "relative", overflow: "hidden", border: "1px solid rgba(255,255,255,0.15)", backdropFilter: "blur(20px)", boxShadow: "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)" }}>
+          <div style={{ position: "absolute", top: -50, right: -50, width: 160, height: 160, borderRadius: "50%", background: "rgba(255,255,255,.06)", pointerEvents: "none" }}></div>
+          <div style={{ position: "absolute", bottom: -30, right: 30, width: 90, height: 90, borderRadius: "50%", background: "rgba(255,255,255,.04)", pointerEvents: "none" }}></div>
+          <Pill color="#67e8f9" style={{ background: "rgba(103,232,249,.15)", color: "#67e8f9", marginBottom: 14, border: "1px solid rgba(103,232,249,0.2)" }}>Smart Medical Triage</Pill>
           <div style={{ fontFamily: "Playfair Display", fontSize: 28, fontWeight: 900, color: "#fff", lineHeight: 1.2, marginBottom: 12 }}>
             How are you feeling today?
           </div>
-          <div style={{ fontSize: 14, color: "rgba(255,255,255,.82)", lineHeight: 1.7, marginBottom: 24 }}>
+          <div style={{ fontSize: 14, color: "rgba(255,255,255,.75)", lineHeight: 1.7, marginBottom: 24 }}>
             Describe your symptoms and receive instant AI-powered triage guidance — from home care to emergency alerts.
           </div>
-          <PrimaryBtn onClick={() => setScreen(SCREENS.CHAT)} style={{ background: "rgba(255,255,255,.95)", color: T.red, boxShadow: "0 4px 16px rgba(0,0,0,.12)" }}>
+          <PrimaryBtn onClick={() => setScreen(SCREENS.CHAT)} style={{ background: "rgba(255,255,255,.15)", color: "#fff", border: "1px solid rgba(255,255,255,0.25)", boxShadow: "0 4px 16px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,0.15)" }}>
             Start Symptom Chat {Ico.right}
           </PrimaryBtn>
         </div>
@@ -444,26 +447,26 @@ function HomeScreen({ setScreen, patient, setPatient, profileDone, setProfileDon
       <div className="fadeUp" style={{ display: "grid", gridTemplateColumns: isDesktop ? "repeat(4,1fr)" : "repeat(2,1fr)", gap: 12, marginBottom: 20, animationDelay: ".1s" }}>
         {features.map((f, i) => (
           <button key={i} onClick={() => setScreen(f.screen)}
-            style={{ background: T.bg, border: `1.5px solid ${T.border}`, borderRadius: 14, padding: "18px 15px", textAlign: "left", cursor: "pointer", transition: "all .18s" }}
-            onMouseOver={e => { e.currentTarget.style.borderColor = T.red; e.currentTarget.style.background = T.pinkLt; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 6px 18px ${T.red}14` }}
-            onMouseOut={e => { e.currentTarget.style.borderColor = T.border; e.currentTarget.style.background = T.bg; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none" }}>
-            <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg,${T.red},${T.rose})`, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", marginBottom: 12 }}>
+            style={{ background: "rgba(255,255,255,0.05)", border: `1px solid rgba(255,255,255,0.1)`, borderRadius: 16, padding: "18px 15px", textAlign: "left", cursor: "pointer", transition: "all .2s", backdropFilter: "blur(12px)", boxShadow: "0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06)" }}
+            onMouseOver={e => { e.currentTarget.style.borderColor = "rgba(56,189,248,0.4)"; e.currentTarget.style.background = "rgba(255,255,255,0.1)"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)" }}
+            onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06)" }}>
+            <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, rgba(56,189,248,0.5), rgba(34,211,238,0.4))`, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", marginBottom: 12, border: "1px solid rgba(255,255,255,0.15)" }}>
               {f.icon}
             </div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: T.text, marginBottom: 3 }}>{f.title}</div>
-            <div style={{ fontSize: 11, color: T.textXs, lineHeight: 1.4 }}>{f.desc}</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: "#f1f5f9", marginBottom: 3 }}>{f.title}</div>
+            <div style={{ fontSize: 11, color: "rgba(148,163,184,0.8)", lineHeight: 1.4 }}>{f.desc}</div>
           </button>
         ))}
       </div>
 
       {/* Emergency Bar */}
-      <div style={{ background: "#fff1f2", border: "1px solid #fecdd3", borderRadius: 14, padding: "14px 18px", display: "flex", alignItems: "center", gap: 14, marginBottom: 4 }}>
-        <div style={{ width: 36, height: 36, borderRadius: 10, background: "#fee2e2", display: "flex", alignItems: "center", justifyContent: "center", color: "#dc2626", flexShrink: 0 }}>{Ico.alert}</div>
+      <div style={{ background: "rgba(220,38,38,0.1)", border: "1px solid rgba(220,38,38,0.2)", borderRadius: 16, padding: "14px 18px", display: "flex", alignItems: "center", gap: 14, marginBottom: 4, backdropFilter: "blur(12px)" }}>
+        <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(220,38,38,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#f87171", flexShrink: 0 }}>{Ico.alert}</div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 13, fontWeight: 700, color: "#dc2626" }}>Life-Threatening Emergency?</div>
-          <div style={{ fontSize: 11, color: "#f87171" }}>Do not wait — call emergency services immediately</div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: "#f87171" }}>Life-Threatening Emergency?</div>
+          <div style={{ fontSize: 11, color: "rgba(248,113,113,0.7)" }}>Do not wait — call emergency services immediately</div>
         </div>
-        <a href="tel:911" style={{ background: `linear-gradient(135deg,${T.red},${T.redDk})`, color: "#fff", fontWeight: 700, fontSize: 13, padding: "10px 18px", borderRadius: 10, textDecoration: "none", flexShrink: 0, boxShadow: `0 3px 10px ${T.red}40` }}>
+        <a href="tel:911" style={{ background: "linear-gradient(135deg, rgba(220,38,38,0.6), rgba(185,28,28,0.7))", color: "#fff", fontWeight: 700, fontSize: 13, padding: "10px 18px", borderRadius: 12, textDecoration: "none", flexShrink: 0, border: "1px solid rgba(255,255,255,0.1)", boxShadow: "0 3px 12px rgba(220,38,38,0.3)" }}>
           Call 108
         </a>
       </div>

@@ -98,7 +98,7 @@ vec3 getLineColor(float t, vec3 baseColor) {
     gradientColor = mix(c1, c2, f);
   }
   
-  return gradientColor * 0.5;
+  return gradientColor * 1.2;
 }
 
   float wave(vec2 uv, float offset, vec2 screenUv, vec2 mouseUv, bool shouldBend) {
@@ -117,7 +117,7 @@ vec3 getLineColor(float t, vec3 baseColor) {
   }
 
   float m = uv.y - y;
-  return 0.0175 / max(abs(m) + 0.01, 1e-3) + 0.01;
+  return 0.012 / max(abs(m) + 0.003, 1e-3);
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
@@ -152,7 +152,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         baseUv,
         mouseUv,
         interactive
-      ) * 0.2;
+      ) * 0.5;
     }
   }
 
@@ -170,7 +170,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         baseUv,
         mouseUv,
         interactive
-      );
+      ) * 1.5;
     }
   }
 
@@ -189,7 +189,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         baseUv,
         mouseUv,
         interactive
-      ) * 0.1;
+      ) * 0.3;
     }
   }
 
@@ -364,9 +364,8 @@ export default function FloatingLines({
         const clock = new Clock();
 
         const setSize = () => {
-            const el = containerRef.current;
-            const width = el.clientWidth || 1;
-            const height = el.clientHeight || 1;
+            const width = window.innerWidth || el.clientWidth || 1000;
+            const height = window.innerHeight || el.clientHeight || 1000;
 
             renderer.setSize(width, height, false);
 
@@ -378,6 +377,7 @@ export default function FloatingLines({
         setSize();
 
         const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(setSize) : null;
+        window.addEventListener('resize', setSize);
 
         if (ro && containerRef.current) {
             ro.observe(containerRef.current);
@@ -438,6 +438,7 @@ export default function FloatingLines({
             if (ro && containerRef.current) {
                 ro.disconnect();
             }
+            window.removeEventListener('resize', setSize);
 
             if (interactive) {
                 renderer.domElement.removeEventListener('pointermove', handlePointerMove);
